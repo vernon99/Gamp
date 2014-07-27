@@ -50,13 +50,19 @@ class GARetentionDecay {
         b = -1.0/c1     // c1 = -1/b
     }
     
-    func estimatedData(steps:Int) -> Array<Float>
+    func dataForSpecificDay(day:Int) -> Float
+    {
+        let x = Float(day)
+        var y = a * exp(-Float(x)/b)
+        return y
+    }
+    
+    func dataForDaysTill(steps:Int) -> Array<Float>
     {
         var result:Array<Float> = []
         for var step = 0; step < steps; step++
         {
-            let x = Float(step)
-            var y = a * exp(-Float(x)/b)
+            var y = dataForSpecificDay(step)
             result.append(y)
         }
         return result

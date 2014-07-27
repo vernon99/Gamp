@@ -20,6 +20,8 @@ let maximumRetentionDays = 30
 class GACohortDataCollection
 {
     var averageRetentionByDay:[Float] = []
+    var retentionDecay:GARetentionDecay? = nil
+    
     var averageARPDAU:Float = 0.0
     var userLifetime:Float = 1.0        // To include zero day as we're calculating retention from 1st day
     var lifetimeValue:Float = 0.0
@@ -67,10 +69,25 @@ class GACohortDataCollection
     
     func prepareKeyNumbers()
     {
+        // Calculate retention estimation
+        retentionDecay = GARetentionDecay(historicalData:averageRetentionByDay)
+        
+        // Use historical data first
         for percentage in averageRetentionByDay
         {
             userLifetime += percentage
         }
+        
+        // Apply estimated data till the end of 180 day period
+        for var day = averageRetentionByDay.count; day < 180; day++
+        {
+            userLifetime += retentionDecay!.dataForSpecificDay(day)
+        }
+        
+        // Finally, we haven't counted zero day. It's a big question on how should we use this data as 100% of users were active at day 0, but some of them just launched the game and closed it. It is safe to assume that users who came back at day 1 have same activity rate as zero day users. So we add 1st day retention for zero day here.
+        userLifetime += averageRetentionByDay[0]
+        
+        // Calculate LTV now
         lifetimeValue = userLifetime * averageARPDAU
     }
     

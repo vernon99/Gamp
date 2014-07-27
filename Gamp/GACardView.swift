@@ -87,14 +87,15 @@ class GACardView: UIView {
                 return
             }
             
-            // Create estimation
-            var retentionDecay = GARetentionDecay(historicalData:retentionArray)
-            var estimation = retentionDecay.estimatedData(maximumRetentionDays)
-            
             // Add estimated data to historical if needed
-            for var n = retentionArray.count; n < estimation.count; n++
+            var estimation:Array<Float> = []
+            if let retentionDecay = collection.retentionDecay
             {
-                retentionArray.append(estimation[n])
+                estimation = retentionDecay.dataForDaysTill(maximumRetentionDays)
+                for var n = retentionArray.count; n < estimation.count; n++
+                {
+                    retentionArray.append(estimation[n])
+                }
             }
             
             // Create charts
@@ -127,7 +128,7 @@ class GACardView: UIView {
             var estimatedData = PNLineChartData()
             estimatedData.inflexionPointStyle = PNLineChartData.PNLineChartPointStyle.PNLineChartPointStyleNone
             estimatedData.color = PNGreyColor
-            estimatedData.itemCount = maximumRetentionDays
+            estimatedData.itemCount = estimation.count
             estimatedData.getData = ({(index: Int) -> PNLineChartDataItem in
                 
                 var item = PNLineChartDataItem()
@@ -147,19 +148,6 @@ class GACardView: UIView {
                 self.lineChart.xLabels = arrayDays
                 self.lineChart.chartData = [estimatedData, historicalData]
                 self.lineChart.strokeChart()
-                
-                var test = ""
-                for var i = 0; i < retentionArray.count; i++
-                {
-                    test += "\(retentionArray[i])\n"
-                }
-                NSLog(test)
-                test = ""
-                for var i = 0; i < retentionArray.count; i++
-                {
-                    test += "\(estimation[i])\n"
-                }
-                NSLog(test)
             })
         })
     }

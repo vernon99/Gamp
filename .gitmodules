@@ -1,0 +1,12 @@
+[submodule "externals/SwiftyJSON"]
+	path = externals/SwiftyJSON
+	url = https://github.com/lingoer/SwiftyJSON.git
+[submodule "externals/PNChart-Swift"]
+	path = externals/PNChart-Swift
+	url = https://github.com/kevinzhow/PNChart-Swift.git
+[submodule "externals/JWT"]
+	path = externals/JWT
+	url = https://github.com/yourkarma/JWT.git
+[submodule "externals/Base64"]
+	path = externals/Base64
+	url = https://github.com/ekscrypto/Base64.git

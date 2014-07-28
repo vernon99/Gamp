@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/vernon99/Gamp.png?label=ready&title=Ready)](https://waffle.io/vernon99/Gamp)
 Intro
 ====
 

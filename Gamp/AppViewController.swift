@@ -40,7 +40,7 @@ class AppViewController: UIViewController, UIScrollViewDelegate {
                 
                 // Date and time
                 let dateStringFormatter = NSDateFormatter()
-                dateStringFormatter.dateFormat = "MM-dd-yyyy"
+                dateStringFormatter.dateFormat = "MM.dd.yyyy"
                 var startDate = dateStringFormatter.dateFromString(builds[buildNumber].date)
                 var endDate = (buildNumber == 0 ? NSDate(timeIntervalSinceNow: -86400*1) : dateStringFormatter.dateFromString(builds[buildNumber-1].date))
                 var endDateMinusMonth = endDate.dateByAddingTimeInterval(-86400*30)

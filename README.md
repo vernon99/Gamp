@@ -13,8 +13,8 @@ GameAnalytics mobile panel
 Examples
 ====
 
-![Screenshot1](https://dl.dropboxusercontent.com/u/33878896/gamp01.png)
-![Screenshot2](https://dl.dropboxusercontent.com/u/33878896/gamp02.png)
+![Screenshot1](Screenshots/gamp01.png?raw=true)
+![Screenshot2](Screenshots/gamp02.png?raw=true)
 
 Note: grey line here is the retention prediction. If there's no historical data, prediction is used instead, as on the 2nd screenshot.
 
